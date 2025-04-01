@@ -4,6 +4,23 @@
 
 This guide explains how to use the Mlytics MCP (Model Context Protocol) Server, which provides a set of tools for managing Mlytics CDN sites and DNS records through the Mlytics API.
 
+## Visual Workflow
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│                 │     │                 │     │                 │
+│  1. Create Site ├────►│ 2. Check Status ├────►│  3. Add DNS     │
+│                 │     │                 │     │     Records     │
+└─────────────────┘     └─────────────────┘     └────────┬────────┘
+                                                         │
+┌─────────────────┐     ┌─────────────────┐     ┌────────▼────────┐
+│                 │     │                 │     │                 │
+│  6. Check Final │◄────┤ 5. Update       │◄────┤ 4. List DNS     │
+│     Status      │     │    Settings     │     │    Records      │
+│                 │     │                 │     │                 │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+```
+
 ## Getting Started
 
 ### Prerequisites
@@ -243,6 +260,63 @@ All tools return responses in a consistent format:
 ```
 
 If an error occurs, the `success` field will be `false` and the `message` field will contain information about the error.
+
+## Detailed Workflow
+
+```
+┌───────────────────────────────────────────────────────────────────────────┐
+│                                                                           │
+│                         Mlytics MCP Server Workflow                       │
+│                                                                           │
+└───────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────┐                      ┌───────────────────┐
+│                   │                      │                   │
+│   Start Process   │                      │   Create Site     │
+│                   │                      │                   │
+└─────────┬─────────┘                      │  create-cdn-site  │
+          │                                │                   │
+          │                                └─────────┬─────────┘
+          │                                          │
+          │                                          │
+          │                                          ▼
+          │                                ┌───────────────────┐
+          │                                │                   │
+          └───────────────────────────────►│   Check Status    │
+                                           │                   │
+                                           │  check-site-status│
+                                           │                   │
+                                           └─────────┬─────────┘
+                                                     │
+                                                     │
+                                                     ▼
+┌───────────────────┐                      ┌───────────────────┐
+│                   │                      │                   │
+│  Update Settings  │◄─────────────────────┤   Add DNS Record  │
+│                   │                      │                   │
+│update-domain-     │                      │  add-dns-record   │
+│settings           │                      │                   │
+└─────────┬─────────┘                      └─────────┬─────────┘
+          │                                          │
+          │                                          │
+          ▼                                          ▼
+┌───────────────────┐                      ┌───────────────────┐
+│                   │                      │                   │
+│  Check Final      │                      │  List DNS Records │
+│  Status           │                      │                   │
+│                   │                      │  list-dns-records │
+│  check-site-status│                      │                   │
+│                   │                      │                   │
+└─────────┬─────────┘                      └───────────────────┘
+          │
+          │
+          ▼
+┌───────────────────┐
+│                   │
+│   Site Active     │
+│                   │
+└───────────────────┘
+```
 
 # Step-by-Step Guide to Setting Up a Site on Mlytics Multi-CDN Platform
 
