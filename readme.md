@@ -87,5 +87,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Additional Resources
 
-- [Mlytics API Documentation](https://docs.mlytics.com/api)
+- [Mlytics API Documentation](https://developer.mlytics.com/v2.0/docs/getting-started)
 - [Model Context Protocol Specification](https://github.com/modelcontextprotocol/spec)
