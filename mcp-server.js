@@ -105,6 +105,14 @@ const ListDnsRecordsSchema = z.object({
   apiKey: z.string().optional(),
 });
 
+const QueryCdnEdgeReportSchema = z.object({
+  domain: z.string(),
+  start_time: z.number(),
+  end_time: z.number(),
+  interval: z.number().optional(),
+  apiKey: z.string().optional(),
+});
+
 // Initialize MCP Server
 const server = new Server(
   {
@@ -238,6 +246,21 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             apiKey: { type: 'string' }
           },
           required: ['siteId']
+        }
+      },
+      {
+        name: 'query-cdn-edge-report',
+        description: 'Query CDN edge performance reports for a domain',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            domain: { type: 'string' },
+            start_time: { type: 'number' },
+            end_time: { type: 'number' },
+            interval: { type: 'number' },
+            apiKey: { type: 'string' }
+          },
+          required: ['domain', 'start_time', 'end_time']
         }
       }
     ]
@@ -568,6 +591,57 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             data: responseData.data,
             meta: responseData.meta,
             message: `DNS records for site ${siteId} retrieved successfully`
+          }));
+        } else {
+          return createTextResponse(JSON.stringify({
+            success: false,
+            message: `API Error: ${responseData.meta ? responseData.meta.message : 'Unknown error'}`,
+            data: responseData
+          }));
+        }
+      } catch (apiError) {
+        return createTextResponse(JSON.stringify({
+          success: false,
+          message: `API Error: ${apiError.message}`
+        }));
+      }
+    }
+    else if (name === 'query-cdn-edge-report') {
+      const { domain, start_time, end_time, interval, apiKey: providedApiKey } = QueryCdnEdgeReportSchema.parse(args);
+      
+      try {
+        // Get API key from provided key or credentials file
+        const apiKey = await getApiKey(providedApiKey);
+        
+        // Build the query URL with parameters
+        const queryParams = new URLSearchParams({
+          domain,
+          start_time: start_time.toString(),
+          end_time: end_time.toString()
+        });
+        
+        // Add optional interval parameter if provided
+        if (interval) {
+          queryParams.append('interval', interval.toString());
+        }
+        
+        // Call the Mlytics API to get CDN edge report
+        const response = await fetch(`https://openapi2.mlytics.com/api/v2/analytics/cdnReport/report/edge?${queryParams}`, {
+          method: 'GET',
+          headers: {
+            'accept': 'application/json',
+            'apikey': apiKey
+          }
+        });
+        
+        const responseData = await response.json();
+        
+        if (responseData.meta && responseData.meta.status === 'success') {
+          return createTextResponse(JSON.stringify({
+            success: true,
+            data: responseData.data,
+            meta: responseData.meta,
+            message: `CDN edge report for domain ${domain} retrieved successfully`
           }));
         } else {
           return createTextResponse(JSON.stringify({

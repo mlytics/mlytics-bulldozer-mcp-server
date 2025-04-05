@@ -4,6 +4,17 @@
 
 This guide explains how to use the Mlytics MCP (Model Context Protocol) Server, which provides a set of tools for managing Mlytics CDN sites and DNS records through the Mlytics API.
 
+## Important Prerequisite
+
+> **DISCLAIMER:** Before you can use any of the MCP commands, you must first create a Mlytics Enterprise account and obtain an API key. 
+> 
+> To get an API key:
+> 1. Sign up for a Mlytics Enterprise account at [https://portal.mlytics.com/](https://portal.mlytics.com/)
+> 2. Navigate to "User Profile" → "API" in the Mlytics portal
+> 3. Click "Generate new" to create a new API key
+> 4. Click "Copy" to copy the API key
+> 5. Save this API key in the `cred` file as described in the setup instructions
+
 ## Visual Workflow
 
 ```
@@ -195,6 +206,40 @@ Lists all CDN sites.
 ```json
 {}
 ```
+
+### 8. Query CDN Edge Report
+
+Retrieves CDN edge performance reports for a specific domain.
+
+**Tool Name:** `query-cdn-edge-report`
+
+**Parameters:**
+- `domain` (required): The domain name to query reports for
+- `start_time` (required): Start timestamp in Unix epoch seconds
+- `end_time` (required): End timestamp in Unix epoch seconds
+- `interval` (optional): Report record granularity in seconds (default varies by time range)
+- `apiKey` (optional): Mlytics API key to use instead of the one in the credentials file
+
+**Example:**
+
+```json
+{
+  "domain": "example.com",
+  "start_time": 1743570000,
+  "end_time": 1743572614,
+  "interval": 3600
+}
+```
+
+**Response Data:**
+
+The response includes performance metrics for each CDN platform, such as:
+- Total requests
+- Hit/miss requests
+- Traffic volume
+- Cache hit ratio
+
+This data helps you analyze CDN performance and make informed decisions about your multi-CDN strategy.
 
 ## Using the MCP Server with Clients
 
