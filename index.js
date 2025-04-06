@@ -11,6 +11,7 @@ import path from 'path';
 import os from 'os';
 import * as crypto from 'crypto';
 import axios from 'axios';
+import { automatedLogin, getValidJwt } from './mcp-auth.js';
 
 // Initialize MCP Server
 const server = new Server(
@@ -79,6 +80,13 @@ const GetPerformanceDataSchema = z.object({
   timeRange: z.enum(['1h', '6h', '24h', '7d', '30d']).optional(),
   cdn: z.string().optional(),
   region: z.string().optional(),
+});
+
+// Schema for automated login
+const LoginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+  headless: z.boolean().optional().default(true),
 });
 
 // Data storage paths
@@ -360,6 +368,28 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
     tools: [
       {
+        name: 'automated-login',
+        description: 'Automate login to Mlytics Portal and extract JWT token for API calls',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            email: { 
+              type: 'string',
+              description: 'User email for Mlytics Portal login' 
+            },
+            password: { 
+              type: 'string',
+              description: 'User password for Mlytics Portal login' 
+            },
+            headless: { 
+              type: 'boolean',
+              description: 'Whether to run the browser in headless mode (default: true)' 
+            }
+          },
+          required: ['email', 'password']
+        }
+      },
+      {
         name: 'create-cdn-site',
         description: 'Create a new CDN site with specified domain and CDN providers',
         inputSchema: {
@@ -582,7 +612,30 @@ server.setRequestHandler(CallToolRequestSchema, async (request, c) => {
   await ensureDataDirExists();
   
   try {
-    if (name === 'create-cdn-site') {
+    if (name === 'automated-login') {
+      // Handle the automated login tool
+      const credentials = LoginSchema.parse(args);
+      try {
+        const authData = await automatedLogin(credentials);
+        
+        // Return the success response with token info (but don't include the actual token for security)
+        return createTextResponse(JSON.stringify({
+          success: true,
+          data: {
+            email: authData.email,
+            loggedInAt: authData.timestamp,
+            tokenStored: true
+          },
+          message: 'Successfully logged in and stored JWT token'
+        }));
+      } catch (error) {
+        return createTextResponse(JSON.stringify({
+          success: false,
+          message: `Login failed: ${error.message}`
+        }));
+      }
+    }
+    else if (name === 'create-cdn-site') {
       const { domain, name: siteName, description, cdnProviders } = CreateSiteSchema.parse(args);
       
       // Mock response based on Mlytics API documentation
