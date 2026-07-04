@@ -1,0 +1,2812 @@
+[
+  {
+    "name": "list-zones",
+    "description": "GET /zones/ (handler: listZonesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/",
+      "apiVersion": "v1",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "create-zone",
+    "description": "POST /zones/ (handler: createZoneHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "domain": {
+              "type": "string"
+            },
+            "copyFrom": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "domain",
+            "copyFrom"
+          ],
+          "description": "Request body (derived from Go struct createZoneBody)"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/zones/",
+      "apiVersion": "v1",
+      "aclScopes": [
+        "_CodeGovernSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "get-zone",
+    "description": "GET /zones/:domain/ (handler: getZoneHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        }
+      },
+      "required": [
+        "domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/:domain/",
+      "apiVersion": "v1",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-zone",
+    "description": "PATCH /zones/:domain/ (handler: updateZoneHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "sslPolicies": {
+              "type": "string"
+            },
+            "port": {
+              "type": "object",
+              "properties": {
+                "http": {
+                  "type": "integer"
+                },
+                "https": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "description": "Request body (derived from Go struct updateZoneBody)"
+        }
+      },
+      "required": [
+        "domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PATCH",
+      "pathTemplate": "/zones/:domain/",
+      "apiVersion": "v1",
+      "aclScopes": [
+        "_CodeControlSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "list-caches",
+    "description": "GET /zones/:domain/caches/ (handler: listCachesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        }
+      },
+      "required": [
+        "domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/:domain/caches/",
+      "apiVersion": "v1",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "create-cache",
+    "description": "POST /zones/:domain/caches/ (handler: createCacheHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "ttl": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "type",
+            "path"
+          ],
+          "description": "Request body (derived from Go struct cacheRequestBody)"
+        }
+      },
+      "required": [
+        "domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/zones/:domain/caches/",
+      "apiVersion": "v1",
+      "aclScopes": [
+        "_CodeControlSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "update-cache",
+    "description": "PUT /zones/:domain/caches/:cache_id/ (handler: updateCacheHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "cache_id": {
+          "type": "string",
+          "description": "Path parameter `cache_id`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "ttl": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "type",
+            "path"
+          ],
+          "description": "Request body (derived from Go struct cacheRequestBody)"
+        }
+      },
+      "required": [
+        "domain",
+        "cache_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PUT",
+      "pathTemplate": "/zones/:domain/caches/:cache_id/",
+      "apiVersion": "v1",
+      "aclScopes": [
+        "_CodeControlSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "delete-cache",
+    "description": "DELETE /zones/:domain/caches/:cache_id/ (handler: deleteCacheHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "cache_id": {
+          "type": "string",
+          "description": "Path parameter `cache_id`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "domain",
+        "cache_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "DELETE",
+      "pathTemplate": "/zones/:domain/caches/:cache_id/",
+      "apiVersion": "v1",
+      "aclScopes": [
+        "_CodeControlSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-purges",
+    "description": "GET /zones/:domain/purges/ (handler: listPurgesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        }
+      },
+      "required": [
+        "domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/:domain/purges/",
+      "apiVersion": "v1",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "create-purge",
+    "description": "POST /zones/:domain/purges/ (handler: createPurgeHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/zones/:domain/purges/",
+      "apiVersion": "v1",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "config",
+    "description": "GET /_config (handler: configHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/_config",
+      "apiVersion": "v1",
+      "aclScopes": [],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-site-purges",
+    "description": "Get All Purges",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "site_domain": {
+          "type": "string",
+          "description": "Path parameter `site_domain`"
+        }
+      },
+      "required": [
+        "site_domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/sites/:site_domain/purges/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "openapi"
+    }
+  },
+  {
+    "name": "create-site-purge",
+    "description": "Create Purge",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "site_domain": {
+          "type": "string",
+          "description": "Path parameter `site_domain`"
+        },
+        "body": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "site_domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/sites/:site_domain/purges/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "openapi"
+    }
+  },
+  {
+    "name": "list-site-caches",
+    "description": "Get All Caches",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "site_domain": {
+          "type": "string",
+          "description": "Path parameter `site_domain`"
+        }
+      },
+      "required": [
+        "site_domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/sites/:site_domain/caches/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "openapi"
+    }
+  },
+  {
+    "name": "create-site-cache",
+    "description": "Create New Site Cache",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "site_domain": {
+          "type": "string",
+          "description": "Path parameter `site_domain`"
+        }
+      },
+      "required": [
+        "site_domain"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/sites/:site_domain/caches/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "openapi"
+    }
+  },
+  {
+    "name": "update-site-cache",
+    "description": "Update Site Cache",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "site_domain": {
+          "type": "string",
+          "description": "Path parameter `site_domain`"
+        },
+        "siteCacheID": {
+          "type": "string",
+          "description": "Path parameter `siteCacheID`"
+        }
+      },
+      "required": [
+        "site_domain",
+        "siteCacheID"
+      ]
+    },
+    "_meta": {
+      "method": "PUT",
+      "pathTemplate": "/sites/:site_domain/caches/:siteCacheID/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "openapi"
+    }
+  },
+  {
+    "name": "delete-site-cache",
+    "description": "Delete Site Cache",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "site_domain": {
+          "type": "string",
+          "description": "Path parameter `site_domain`"
+        },
+        "siteCacheID": {
+          "type": "string",
+          "description": "Path parameter `siteCacheID`"
+        }
+      },
+      "required": [
+        "site_domain",
+        "siteCacheID"
+      ]
+    },
+    "_meta": {
+      "method": "DELETE",
+      "pathTemplate": "/sites/:site_domain/caches/:siteCacheID/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "openapi"
+    }
+  },
+  {
+    "name": "list-v2-zone-purges",
+    "description": "GET /zones/:zone_domain/purges/ (handler: listV2ZonePurgesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        }
+      },
+      "required": [
+        "zone_domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/:zone_domain/purges/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "create-v2-zone-purge",
+    "description": "POST /zones/:zone_domain/purges/ (handler: createV2ZonePurgeHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "zone_domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/zones/:zone_domain/purges/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-caches-v2",
+    "description": "GET /zones/:zone_domain/caches/ (handler: listCachesV2Handler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        }
+      },
+      "required": [
+        "zone_domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/:zone_domain/caches/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "create-cache-v2",
+    "description": "POST /zones/:zone_domain/caches/ (handler: createCacheV2Handler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "ttl": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "type",
+            "path"
+          ],
+          "description": "Request body (derived from Go struct cacheRequestBody)"
+        }
+      },
+      "required": [
+        "zone_domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/zones/:zone_domain/caches/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "update-cache-v2",
+    "description": "PUT /zones/:zone_domain/caches/:cache_id/ (handler: updateCacheV2Handler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        },
+        "cache_id": {
+          "type": "string",
+          "description": "Path parameter `cache_id`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "ttl": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "type",
+            "path"
+          ],
+          "description": "Request body (derived from Go struct cacheRequestBody)"
+        }
+      },
+      "required": [
+        "zone_domain",
+        "cache_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PUT",
+      "pathTemplate": "/zones/:zone_domain/caches/:cache_id/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "delete-cache-v2",
+    "description": "DELETE /zones/:zone_domain/caches/:cache_id/ (handler: deleteCacheV2Handler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        },
+        "cache_id": {
+          "type": "string",
+          "description": "Path parameter `cache_id`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "zone_domain",
+        "cache_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "DELETE",
+      "pathTemplate": "/zones/:zone_domain/caches/:cache_id/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-zone-v2",
+    "description": "GET /zones/ (handler: listZoneV2Handler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "get-zone-v2",
+    "description": "GET /zones/:zone_domain/ (handler: getZoneV2Handler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        }
+      },
+      "required": [
+        "zone_domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/:zone_domain/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-zone-v2",
+    "description": "PATCH /zones/:zone_domain/ (handler: updateZoneV2Handler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "customHostHeader": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "protocol": {
+              "type": "string"
+            },
+            "port": {
+              "type": "object",
+              "properties": {
+                "http": {
+                  "type": "integer"
+                },
+                "https": {
+                  "type": "integer"
+                }
+              }
+            },
+            "sni": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "description": "Request body (derived from Go struct UpdateZoneRequest)"
+        }
+      },
+      "required": [
+        "zone_domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PATCH",
+      "pathTemplate": "/zones/:zone_domain/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "list-zone-platforms-v2",
+    "description": "GET /zones/:zone_domain/platforms/ (handler: listZonePlatformsV2Handler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        }
+      },
+      "required": [
+        "zone_domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/:zone_domain/platforms/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-selectable-zone-platforms",
+    "description": "GET /zones/:zone_domain/selectable_platforms/ (handler: listSelectableZonePlatformsHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        }
+      },
+      "required": [
+        "zone_domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/:zone_domain/selectable_platforms/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-zone-single-platform",
+    "description": "PATCH /zones/:zone_domain/platforms/:platform_name/type/:platform_type/ (handler: updateZoneSinglePlatformHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        },
+        "platform_name": {
+          "type": "string",
+          "description": "Path parameter `platform_name`"
+        },
+        "platform_type": {
+          "type": "string",
+          "description": "Path parameter `platform_type`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "cname": {
+              "type": "string"
+            },
+            "enable": {
+              "type": "boolean"
+            }
+          },
+          "description": "Request body (derived from Go struct exposedReqBody)"
+        }
+      },
+      "required": [
+        "zone_domain",
+        "platform_name",
+        "platform_type",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PATCH",
+      "pathTemplate": "/zones/:zone_domain/platforms/:platform_name/type/:platform_type/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "get-global-fallback",
+    "description": "GET /zones/:zone_domain/global_fallback/ (handler: getGlobalFallbackHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        }
+      },
+      "required": [
+        "zone_domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/zones/:zone_domain/global_fallback/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-global-fallback",
+    "description": "PATCH /zones/:zone_domain/global_fallback/ (handler: updateGlobalFallbackHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "globalFallback": {
+              "type": "string"
+            }
+          },
+          "description": "Request body (derived from Go struct UpdateGlobalFallbackRequest)"
+        }
+      },
+      "required": [
+        "zone_domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PATCH",
+      "pathTemplate": "/zones/:zone_domain/global_fallback/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "delete-global-fallback",
+    "description": "DELETE /zones/:zone_domain/global_fallback/ (handler: deleteGlobalFallbackHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "zone_domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "DELETE",
+      "pathTemplate": "/zones/:zone_domain/global_fallback/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-sslcerts",
+    "description": "List SSL Certificates",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/sslcerts/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "openapi"
+    }
+  },
+  {
+    "name": "create-sslcert",
+    "description": "Upload SSL Certificate",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/sslcerts/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "openapi"
+    }
+  },
+  {
+    "name": "list-power-up-addons",
+    "description": "GET /powerup/addon/ (handler: listPowerUpAddonsHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/powerup/addon/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "install-power-up-addons",
+    "description": "POST /zones/:zone_domain/addons/ (handler: installPowerUpAddonsHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "addonID": {
+              "type": "string"
+            },
+            "domain": {
+              "type": "string"
+            },
+            "assetID": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "addonID",
+            "domain",
+            "assetID"
+          ],
+          "description": "Request body (derived from Go struct requestBody)"
+        }
+      },
+      "required": [
+        "zone_domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/zones/:zone_domain/addons/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeGovernSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "remove-power-up-addons",
+    "description": "DELETE /zones/:zone_domain/addons/:addon_id/ (handler: removePowerUpAddonsHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "zone_domain": {
+          "type": "string",
+          "description": "Path parameter `zone_domain`"
+        },
+        "addon_id": {
+          "type": "string",
+          "description": "Path parameter `addon_id`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "zone_domain",
+        "addon_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "DELETE",
+      "pathTemplate": "/zones/:zone_domain/addons/:addon_id/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeGovernSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "get-wafproperty",
+    "description": "GET /wafs/properties/:property_type/ (handler: getWAFPropertyHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "property_type": {
+          "type": "string",
+          "description": "Path parameter `property_type`"
+        }
+      },
+      "required": [
+        "property_type"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/wafs/properties/:property_type/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-acl",
+    "description": "GET /wafs/:domain/access_control/:acl_type/:allow_type/ (handler: listAclHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "acl_type": {
+          "type": "string",
+          "description": "Path parameter `acl_type`"
+        },
+        "allow_type": {
+          "type": "string",
+          "description": "Path parameter `allow_type`"
+        }
+      },
+      "required": [
+        "domain",
+        "acl_type",
+        "allow_type"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/wafs/:domain/access_control/:acl_type/:allow_type/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "batch-create-acl",
+    "description": "POST /wafs/:domain/access_control/:acl_type/:allow_type/ (handler: batchCreateAclHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "acl_type": {
+          "type": "string",
+          "description": "Path parameter `acl_type`"
+        },
+        "allow_type": {
+          "type": "string",
+          "description": "Path parameter `allow_type`"
+        },
+        "body": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "value"
+            ]
+          },
+          "description": "Request body (derived from Go struct []WafmgmtBatchCreate)"
+        }
+      },
+      "required": [
+        "domain",
+        "acl_type",
+        "allow_type",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/wafs/:domain/access_control/:acl_type/:allow_type/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "batch-delete-acl",
+    "description": "DELETE /wafs/:domain/access_control/:acl_type/:allow_type/ (handler: batchDeleteAclHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "acl_type": {
+          "type": "string",
+          "description": "Path parameter `acl_type`"
+        },
+        "allow_type": {
+          "type": "string",
+          "description": "Path parameter `allow_type`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "domain",
+        "acl_type",
+        "allow_type",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "DELETE",
+      "pathTemplate": "/wafs/:domain/access_control/:acl_type/:allow_type/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-custom-rules",
+    "description": "GET /wafs/:domain/:custom_rule_type/ (handler: listCustomRulesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "custom_rule_type": {
+          "type": "string",
+          "description": "Path parameter `custom_rule_type`"
+        }
+      },
+      "required": [
+        "domain",
+        "custom_rule_type"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/wafs/:domain/:custom_rule_type/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "create-custom-rule",
+    "description": "POST /wafs/:domain/:custom_rule_type/ (handler: createCustomRuleHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "custom_rule_type": {
+          "type": "string",
+          "description": "Path parameter `custom_rule_type`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "enable": {
+              "type": "boolean"
+            },
+            "priority": {
+              "type": "integer"
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "isRequest": {
+                    "type": "boolean"
+                  },
+                  "field": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ]
+                  },
+                  "operator": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ]
+                  },
+                  "logic": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "isRequest",
+                  "field",
+                  "operator"
+                ]
+              }
+            }
+          },
+          "required": [
+            "name",
+            "rules"
+          ],
+          "description": "Request body (derived from Go struct WafCustomRuleCreate)"
+        }
+      },
+      "required": [
+        "domain",
+        "custom_rule_type",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/wafs/:domain/:custom_rule_type/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "batch-update-custom-rule",
+    "description": "PUT /wafs/:domain/:custom_rule_type/ (handler: batchUpdateCustomRuleHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "custom_rule_type": {
+          "type": "string",
+          "description": "Path parameter `custom_rule_type`"
+        },
+        "body": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "priority": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id",
+              "priority"
+            ]
+          },
+          "description": "Request body (derived from Go struct []WafCustomRuleBatchUpdate)"
+        }
+      },
+      "required": [
+        "domain",
+        "custom_rule_type",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PUT",
+      "pathTemplate": "/wafs/:domain/:custom_rule_type/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "update-custom-rule",
+    "description": "PATCH /wafs/:domain/:custom_rule_type/:custom_rule_id/ (handler: updateCustomRuleHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "custom_rule_type": {
+          "type": "string",
+          "description": "Path parameter `custom_rule_type`"
+        },
+        "custom_rule_id": {
+          "type": "string",
+          "description": "Path parameter `custom_rule_id`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "boolean"
+            }
+          },
+          "description": "Request body (derived from Go struct WafCustomRuleUpdate)"
+        }
+      },
+      "required": [
+        "domain",
+        "custom_rule_type",
+        "custom_rule_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PATCH",
+      "pathTemplate": "/wafs/:domain/:custom_rule_type/:custom_rule_id/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "delete-custom-rule",
+    "description": "DELETE /wafs/:domain/:custom_rule_type/:custom_rule_id/ (handler: deleteCustomRuleHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "custom_rule_type": {
+          "type": "string",
+          "description": "Path parameter `custom_rule_type`"
+        },
+        "custom_rule_id": {
+          "type": "string",
+          "description": "Path parameter `custom_rule_id`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "domain",
+        "custom_rule_type",
+        "custom_rule_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "DELETE",
+      "pathTemplate": "/wafs/:domain/:custom_rule_type/:custom_rule_id/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "switch-advanced-cache-rule",
+    "description": "PUT /wafs/:domain/advanced_cache_enable/ (handler: switchAdvancedCacheRuleHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "boolean"
+            }
+          },
+          "description": "Request body (derived from Go struct switchAdvancedCacheRule)"
+        }
+      },
+      "required": [
+        "domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PUT",
+      "pathTemplate": "/wafs/:domain/advanced_cache_enable/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "get-ddos",
+    "description": "GET /wafs/:domain/ddos/ (handler: getDdosHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        }
+      },
+      "required": [
+        "domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/wafs/:domain/ddos/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-ddos",
+    "description": "PATCH /wafs/:domain/ddos/ (handler: updateDdosHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "seo": {
+              "type": "object",
+              "properties": {
+                "enable": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "blockSecurityScan": {
+              "type": "boolean"
+            },
+            "blockBadBot": {
+              "type": "boolean"
+            },
+            "browserCheck": {
+              "type": "object",
+              "properties": {
+                "enable": {
+                  "type": "boolean"
+                },
+                "mode": {
+                  "type": "string"
+                }
+              }
+            },
+            "security": {
+              "type": "object",
+              "properties": {
+                "enable": {
+                  "type": "boolean"
+                },
+                "level": {
+                  "type": "string"
+                },
+                "mode": {
+                  "type": "string"
+                },
+                "ttl": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "description": "Request body (derived from Go struct model.WafDdos)"
+        }
+      },
+      "required": [
+        "domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PATCH",
+      "pathTemplate": "/wafs/:domain/ddos/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "signup-user",
+    "description": "POST /accounts/signup/ (handler: signupUserHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "organizationName": {
+              "type": "string"
+            },
+            "hubspotToken": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "email"
+          ],
+          "description": "Request body (derived from Go struct SignupUserRequest)"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/accounts/signup/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodePassPermission"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "login-user",
+    "description": "POST /accounts/login/ (handler: loginUserHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "email"
+          ],
+          "description": "Request body (derived from Go struct LoginUserRequest)"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/accounts/login/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodePassPermission"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "login-verify-user",
+    "description": "POST /accounts/login-verify/ (handler: loginVerifyUserHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "emailOtp": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "email",
+            "emailOtp"
+          ],
+          "description": "Request body (derived from Go struct LoginVerifyUserRequest)"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/accounts/login-verify/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodePassPermission"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "logout-user",
+    "description": "POST /accounts/logout/ (handler: logoutUserHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/accounts/logout/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodePassPermission"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "get-user-profile",
+    "description": "GET /accounts/user-profile/ (handler: getUserProfileHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/accounts/user-profile/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodePassPermission"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-user-profile",
+    "description": "PUT /accounts/user-profile/ (handler: updateUserProfileHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          },
+          "description": "Request body (derived from Go struct UpdateUserProfileRequest)"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PUT",
+      "pathTemplate": "/accounts/user-profile/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodePassPermission"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "get-user-apikey",
+    "description": "GET /accounts/user-profile/api-key/ (handler: getUserAPIKeyHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/accounts/user-profile/api-key/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodePassPermission"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-user-apikey",
+    "description": "PUT /accounts/user-profile/api-key/ (handler: updateUserAPIKeyHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PUT",
+      "pathTemplate": "/accounts/user-profile/api-key/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodePassPermission"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "delete-user-apikey",
+    "description": "DELETE /accounts/user-profile/api-key/ (handler: deleteUserAPIKeyHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "DELETE",
+      "pathTemplate": "/accounts/user-profile/api-key/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodePassPermission"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-teammates",
+    "description": "GET /accounts/teammates/ (handler: listTeammatesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/accounts/teammates/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreUserAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "create-teammate",
+    "description": "POST /accounts/teammates/ (handler: createTeammateHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "email",
+            "firstName",
+            "lastName"
+          ],
+          "description": "Request body (derived from Go struct CreateTeammateRequest)"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/accounts/teammates/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeControlUserAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "list-teammate-roles",
+    "description": "GET /accounts/teammates/:teammate_id/roles/ (handler: listTeammateRolesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "teammate_id": {
+          "type": "string",
+          "description": "Path parameter `teammate_id`"
+        }
+      },
+      "required": [
+        "teammate_id"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/accounts/teammates/:teammate_id/roles/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreUserAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-teammate-roles",
+    "description": "PUT /accounts/teammates/:teammate_id/roles/ (handler: updateTeammateRolesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "teammate_id": {
+          "type": "string",
+          "description": "Path parameter `teammate_id`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "roleIds": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          "required": [
+            "roleIds"
+          ],
+          "description": "Request body (derived from Go struct UpdateTeammateRolesRequest)"
+        }
+      },
+      "required": [
+        "teammate_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PUT",
+      "pathTemplate": "/accounts/teammates/:teammate_id/roles/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeUserAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "deactivate-teammate",
+    "description": "POST /accounts/teammates/:teammate_id/deactivate/ (handler: deactivateTeammateHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "teammate_id": {
+          "type": "string",
+          "description": "Path parameter `teammate_id`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "teammate_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/accounts/teammates/:teammate_id/deactivate/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeUserAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "reactivate-teammate",
+    "description": "POST /accounts/teammates/:teammate_id/reactivate/ (handler: reactivateTeammateHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "teammate_id": {
+          "type": "string",
+          "description": "Path parameter `teammate_id`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "teammate_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/accounts/teammates/:teammate_id/reactivate/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeUserAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "delete-teammate",
+    "description": "DELETE /accounts/teammates/:teammate_id/ (handler: deleteTeammateHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "teammate_id": {
+          "type": "string",
+          "description": "Path parameter `teammate_id`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "teammate_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "DELETE",
+      "pathTemplate": "/accounts/teammates/:teammate_id/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeGovernUserAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "get-organization-profile",
+    "description": "GET /accounts/organization-profile/ (handler: getOrganizationProfileHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/accounts/organization-profile/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodePassPermission"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-organization-profile",
+    "description": "PUT /accounts/organization-profile/ (handler: updateOrganizationProfileHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "organizationName": {
+              "type": "string"
+            },
+            "organizationMasterApp": {
+              "type": "string"
+            },
+            "organizationIndustry": {
+              "type": "string"
+            },
+            "organizationJobTitle": {
+              "type": "string"
+            }
+          },
+          "description": "Request body (derived from Go struct UpdateOrganizationProfileRequest)"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PUT",
+      "pathTemplate": "/accounts/organization-profile/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "list-organization-roles",
+    "description": "GET /accounts/organization-profile/roles/ (handler: listOrganizationRolesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/accounts/organization-profile/roles/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreUserAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-transcoder-scenario",
+    "description": "GET /stream-controller/transcoder_scenario/ (handler: listTranscoderScenarioHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/stream-controller/transcoder_scenario/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "create-stream-application",
+    "description": "POST /stream-controller/app/ (handler: createStreamApplicationHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "scenario_name": {
+              "type": "string"
+            },
+            "output_domain": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "scenario_name"
+          ],
+          "description": "Request body (derived from Go struct CreateStreamApplication)"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/stream-controller/app/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "list-stream-application",
+    "description": "GET /stream-controller/app/ (handler: listStreamApplicationHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/stream-controller/app/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-stream-application",
+    "description": "PATCH /stream-controller/app/:app_name/ (handler: updateStreamApplicationHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "app_name": {
+          "type": "string",
+          "description": "Path parameter `app_name`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "chunk_duration": {
+              "type": "integer"
+            },
+            "chunk_count": {
+              "type": "integer"
+            },
+            "hls_part_duration": {
+              "type": "integer"
+            },
+            "alhls_enable": {
+              "type": "boolean"
+            },
+            "output_domain": {
+              "type": "string"
+            }
+          },
+          "description": "Request body (derived from Go struct UpdateStreamApplication)"
+        }
+      },
+      "required": [
+        "app_name",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PATCH",
+      "pathTemplate": "/stream-controller/app/:app_name/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "get-stream-application",
+    "description": "GET /stream-controller/app/:app_name/ (handler: getStreamApplicationHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "app_name": {
+          "type": "string",
+          "description": "Path parameter `app_name`"
+        }
+      },
+      "required": [
+        "app_name"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/stream-controller/app/:app_name/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "get-decisive-zone",
+    "description": "GET /decisive/zones/:domain (handler: getDecisiveZoneHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        }
+      },
+      "required": [
+        "domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/decisive/zones/:domain",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-decisive-zone",
+    "description": "PATCH /decisive/zones/:domain (handler: updateDecisiveZoneHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "cname_flatten": {
+              "type": "boolean"
+            },
+            "ttl": {
+              "type": "integer"
+            }
+          },
+          "description": "Request body (derived from Go struct updateDecisiveZoneRequest)"
+        }
+      },
+      "required": [
+        "domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PATCH",
+      "pathTemplate": "/decisive/zones/:domain",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "list-strategy-profiles",
+    "description": "GET /decisive/strategyProfiles/ (handler: listStrategyProfilesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/decisive/strategyProfiles/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "list-strategies",
+    "description": "GET /decisive/zones/:domain/strategies/ (handler: listStrategiesHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        }
+      },
+      "required": [
+        "domain"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/decisive/zones/:domain/strategies/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "create-strategy",
+    "description": "POST /decisive/zones/:domain/strategies/ (handler: createStrategyHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "profile_id": {
+              "type": "integer"
+            },
+            "detail": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "required": [
+            "name",
+            "profile_id"
+          ],
+          "description": "Request body (derived from Go struct requestBody)"
+        }
+      },
+      "required": [
+        "domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "POST",
+      "pathTemplate": "/decisive/zones/:domain/strategies/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "update-strategy-priority",
+    "description": "PATCH /decisive/zones/:domain/strategies/priority/ (handler: updateStrategyPriorityHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "strategies": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          "required": [
+            "strategies"
+          ],
+          "description": "Request body (derived from Go struct requestBody)"
+        }
+      },
+      "required": [
+        "domain",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PATCH",
+      "pathTemplate": "/decisive/zones/:domain/strategies/priority/",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "get-strategy-detail",
+    "description": "GET /decisive/zones/:domain/strategies/:strategy_id (handler: getStrategyDetailHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Path parameter `strategy_id`"
+        }
+      },
+      "required": [
+        "domain",
+        "strategy_id"
+      ]
+    },
+    "_meta": {
+      "method": "GET",
+      "pathTemplate": "/decisive/zones/:domain/strategies/:strategy_id",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeExploreSiteAPI"
+      ],
+      "readOnly": true,
+      "schemaSource": "inferred"
+    }
+  },
+  {
+    "name": "update-strategy",
+    "description": "PATCH /decisive/zones/:domain/strategies/:strategy_id (handler: updateStrategyHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Path parameter `strategy_id`"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "activation": {
+              "type": "boolean"
+            },
+            "name": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "description": "Request body (derived from Go struct requestBody)"
+        }
+      },
+      "required": [
+        "domain",
+        "strategy_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "PATCH",
+      "pathTemplate": "/decisive/zones/:domain/strategies/:strategy_id",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "go-struct"
+    }
+  },
+  {
+    "name": "delete-strategy",
+    "description": "DELETE /decisive/zones/:domain/strategies/:strategy_id (handler: deleteStrategyHandler)",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Path parameter `domain`"
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Path parameter `strategy_id`"
+        },
+        "body": {
+          "type": "object",
+          "description": "Request body (schema not yet in OpenAPI spec — backfill needed)",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "domain",
+        "strategy_id",
+        "body"
+      ]
+    },
+    "_meta": {
+      "method": "DELETE",
+      "pathTemplate": "/decisive/zones/:domain/strategies/:strategy_id",
+      "apiVersion": "v2",
+      "aclScopes": [
+        "_CodeInvokeSiteAPI"
+      ],
+      "readOnly": false,
+      "schemaSource": "inferred"
+    }
+  }
+]

@@ -1,0 +1,672 @@
+{
+  "batchCreateAclHandler": {
+    "structName": "[]WafmgmtBatchCreate",
+    "schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+    }
+  },
+  "batchUpdateCustomRuleHandler": {
+    "structName": "[]WafCustomRuleBatchUpdate",
+    "schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "priority"
+        ]
+      }
+    }
+  },
+  "createCacheHandler": {
+    "structName": "cacheRequestBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "ttl": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "type",
+        "path"
+      ]
+    }
+  },
+  "createCacheV2Handler": {
+    "structName": "cacheRequestBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "ttl": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "type",
+        "path"
+      ]
+    }
+  },
+  "createCustomRuleHandler": {
+    "structName": "WafCustomRuleCreate",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "enable": {
+          "type": "boolean"
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "isRequest": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "operator": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "logic": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "isRequest",
+              "field",
+              "operator"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "rules"
+      ]
+    }
+  },
+  "createSSLCertHandler": {
+    "structName": "SSLCertRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "batchBinding": {
+          "type": "boolean"
+        },
+        "cert": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "chain": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "batchBinding",
+        "cert",
+        "key",
+        "chain"
+      ]
+    }
+  },
+  "createStrategyHandler": {
+    "structName": "requestBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "profile_id": {
+          "type": "integer"
+        },
+        "detail": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      "required": [
+        "name",
+        "profile_id"
+      ]
+    }
+  },
+  "createStreamApplicationHandler": {
+    "structName": "CreateStreamApplication",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "scenario_name": {
+          "type": "string"
+        },
+        "output_domain": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "scenario_name"
+      ]
+    }
+  },
+  "createTeammateHandler": {
+    "structName": "CreateTeammateRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "firstName",
+        "lastName"
+      ]
+    }
+  },
+  "createZoneHandler": {
+    "structName": "createZoneBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "copyFrom": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "domain",
+        "copyFrom"
+      ]
+    }
+  },
+  "installPowerUpAddonsHandler": {
+    "structName": "requestBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "addonID": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "assetID": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "addonID",
+        "domain",
+        "assetID"
+      ]
+    }
+  },
+  "loginUserHandler": {
+    "structName": "LoginUserRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    }
+  },
+  "loginVerifyUserHandler": {
+    "structName": "LoginVerifyUserRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "emailOtp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "emailOtp"
+      ]
+    }
+  },
+  "signupUserHandler": {
+    "structName": "SignupUserRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "organizationName": {
+          "type": "string"
+        },
+        "hubspotToken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    }
+  },
+  "switchAdvancedCacheRuleHandler": {
+    "structName": "switchAdvancedCacheRule",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "updateCacheHandler": {
+    "structName": "cacheRequestBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "ttl": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "type",
+        "path"
+      ]
+    }
+  },
+  "updateCacheV2Handler": {
+    "structName": "cacheRequestBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "ttl": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "type",
+        "path"
+      ]
+    }
+  },
+  "updateCustomRuleHandler": {
+    "structName": "WafCustomRuleUpdate",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "updateDdosHandler": {
+    "structName": "model.WafDdos",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "seo": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "boolean"
+            }
+          }
+        },
+        "blockSecurityScan": {
+          "type": "boolean"
+        },
+        "blockBadBot": {
+          "type": "boolean"
+        },
+        "browserCheck": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "boolean"
+            },
+            "mode": {
+              "type": "string"
+            }
+          }
+        },
+        "security": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "boolean"
+            },
+            "level": {
+              "type": "string"
+            },
+            "mode": {
+              "type": "string"
+            },
+            "ttl": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "updateDecisiveZoneHandler": {
+    "structName": "updateDecisiveZoneRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "cname_flatten": {
+          "type": "boolean"
+        },
+        "ttl": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "updateGlobalFallbackHandler": {
+    "structName": "UpdateGlobalFallbackRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "globalFallback": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "updateOrganizationProfileHandler": {
+    "structName": "UpdateOrganizationProfileRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "organizationName": {
+          "type": "string"
+        },
+        "organizationMasterApp": {
+          "type": "string"
+        },
+        "organizationIndustry": {
+          "type": "string"
+        },
+        "organizationJobTitle": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "updateStrategyHandler": {
+    "structName": "requestBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "activation": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "object",
+          "properties": {}
+        }
+      }
+    }
+  },
+  "updateStrategyPriorityHandler": {
+    "structName": "requestBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "strategies": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      },
+      "required": [
+        "strategies"
+      ]
+    }
+  },
+  "updateStreamApplicationHandler": {
+    "structName": "UpdateStreamApplication",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "chunk_duration": {
+          "type": "integer"
+        },
+        "chunk_count": {
+          "type": "integer"
+        },
+        "hls_part_duration": {
+          "type": "integer"
+        },
+        "alhls_enable": {
+          "type": "boolean"
+        },
+        "output_domain": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "updateTeammateRolesHandler": {
+    "structName": "UpdateTeammateRolesRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "roleIds": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      },
+      "required": [
+        "roleIds"
+      ]
+    }
+  },
+  "updateUserProfileHandler": {
+    "structName": "UpdateUserProfileRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "updateZoneHandler": {
+    "structName": "updateZoneBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sslPolicies": {
+          "type": "string"
+        },
+        "port": {
+          "type": "object",
+          "properties": {
+            "http": {
+              "type": "integer"
+            },
+            "https": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "required": [
+        "port"
+      ]
+    }
+  },
+  "updateZoneSinglePlatformHandler": {
+    "structName": "exposedReqBody",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "cname": {
+          "type": "string"
+        },
+        "enable": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "updateZoneV2Handler": {
+    "structName": "UpdateZoneRequest",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "customHostHeader": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "port": {
+          "type": "object",
+          "properties": {
+            "http": {
+              "type": "integer"
+            },
+            "https": {
+              "type": "integer"
+            }
+          }
+        },
+        "sni": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "port"
+      ]
+    }
+  }
+}

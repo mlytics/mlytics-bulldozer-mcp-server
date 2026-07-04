@@ -1,0 +1,820 @@
+[
+  {
+    "api_version": "v1",
+    "method": "GET",
+    "path": "/zones/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listZonesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v1",
+    "method": "POST",
+    "path": "/zones/",
+    "scopes": [
+      "_CodeGovernSiteAPI"
+    ],
+    "handler": "createZoneHandler",
+    "write": true
+  },
+  {
+    "api_version": "v1",
+    "method": "GET",
+    "path": "/zones/:domain/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "getZoneHandler",
+    "write": false
+  },
+  {
+    "api_version": "v1",
+    "method": "PATCH",
+    "path": "/zones/:domain/",
+    "scopes": [
+      "_CodeControlSiteAPI"
+    ],
+    "handler": "updateZoneHandler",
+    "write": true
+  },
+  {
+    "api_version": "v1",
+    "method": "GET",
+    "path": "/zones/:domain/caches/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listCachesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v1",
+    "method": "POST",
+    "path": "/zones/:domain/caches/",
+    "scopes": [
+      "_CodeControlSiteAPI"
+    ],
+    "handler": "createCacheHandler",
+    "write": true
+  },
+  {
+    "api_version": "v1",
+    "method": "PUT",
+    "path": "/zones/:domain/caches/:cache_id/",
+    "scopes": [
+      "_CodeControlSiteAPI"
+    ],
+    "handler": "updateCacheHandler",
+    "write": true
+  },
+  {
+    "api_version": "v1",
+    "method": "DELETE",
+    "path": "/zones/:domain/caches/:cache_id/",
+    "scopes": [
+      "_CodeControlSiteAPI"
+    ],
+    "handler": "deleteCacheHandler",
+    "write": true
+  },
+  {
+    "api_version": "v1",
+    "method": "GET",
+    "path": "/zones/:domain/purges/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listPurgesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v1",
+    "method": "POST",
+    "path": "/zones/:domain/purges/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "createPurgeHandler",
+    "write": true
+  },
+  {
+    "api_version": "v1",
+    "method": "GET",
+    "path": "/_config",
+    "scopes": [],
+    "handler": "configHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/sites/:site_domain/purges/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listSitePurgesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/sites/:site_domain/purges/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "createSitePurgeHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/sites/:site_domain/caches/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listSiteCachesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/sites/:site_domain/caches/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "createSiteCacheHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "PUT",
+    "path": "/sites/:site_domain/caches/:siteCacheID/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateSiteCacheHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "DELETE",
+    "path": "/sites/:site_domain/caches/:siteCacheID/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "deleteSiteCacheHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/zones/:zone_domain/purges/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listV2ZonePurgesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/zones/:zone_domain/purges/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "createV2ZonePurgeHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/zones/:zone_domain/caches/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listCachesV2Handler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/zones/:zone_domain/caches/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "createCacheV2Handler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "PUT",
+    "path": "/zones/:zone_domain/caches/:cache_id/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateCacheV2Handler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "DELETE",
+    "path": "/zones/:zone_domain/caches/:cache_id/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "deleteCacheV2Handler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/zones/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listZoneV2Handler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/zones/:zone_domain/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "getZoneV2Handler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PATCH",
+    "path": "/zones/:zone_domain/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateZoneV2Handler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/zones/:zone_domain/platforms/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listZonePlatformsV2Handler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/zones/:zone_domain/selectable_platforms/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listSelectableZonePlatformsHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PATCH",
+    "path": "/zones/:zone_domain/platforms/:platform_name/type/:platform_type/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateZoneSinglePlatformHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/zones/:zone_domain/global_fallback/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "getGlobalFallbackHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PATCH",
+    "path": "/zones/:zone_domain/global_fallback/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateGlobalFallbackHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "DELETE",
+    "path": "/zones/:zone_domain/global_fallback/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "deleteGlobalFallbackHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/sslcerts/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listSSLCertsHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/sslcerts/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "createSSLCertHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/powerup/addon/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listPowerUpAddonsHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/zones/:zone_domain/addons/",
+    "scopes": [
+      "_CodeGovernSiteAPI"
+    ],
+    "handler": "installPowerUpAddonsHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "DELETE",
+    "path": "/zones/:zone_domain/addons/:addon_id/",
+    "scopes": [
+      "_CodeGovernSiteAPI"
+    ],
+    "handler": "removePowerUpAddonsHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/wafs/properties/:property_type/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "getWAFPropertyHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/wafs/:domain/access_control/:acl_type/:allow_type/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listAclHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/wafs/:domain/access_control/:acl_type/:allow_type/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "batchCreateAclHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "DELETE",
+    "path": "/wafs/:domain/access_control/:acl_type/:allow_type/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "batchDeleteAclHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/wafs/:domain/:custom_rule_type/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listCustomRulesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/wafs/:domain/:custom_rule_type/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "createCustomRuleHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "PUT",
+    "path": "/wafs/:domain/:custom_rule_type/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "batchUpdateCustomRuleHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "PATCH",
+    "path": "/wafs/:domain/:custom_rule_type/:custom_rule_id/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateCustomRuleHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "DELETE",
+    "path": "/wafs/:domain/:custom_rule_type/:custom_rule_id/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "deleteCustomRuleHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "PUT",
+    "path": "/wafs/:domain/advanced_cache_enable/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "switchAdvancedCacheRuleHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/wafs/:domain/ddos/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "getDdosHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PATCH",
+    "path": "/wafs/:domain/ddos/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateDdosHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/accounts/signup/",
+    "scopes": [
+      "_CodePassPermission"
+    ],
+    "handler": "signupUserHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/accounts/login/",
+    "scopes": [
+      "_CodePassPermission"
+    ],
+    "handler": "loginUserHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/accounts/login-verify/",
+    "scopes": [
+      "_CodePassPermission"
+    ],
+    "handler": "loginVerifyUserHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/accounts/logout/",
+    "scopes": [
+      "_CodePassPermission"
+    ],
+    "handler": "logoutUserHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/accounts/user-profile/",
+    "scopes": [
+      "_CodePassPermission"
+    ],
+    "handler": "getUserProfileHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PUT",
+    "path": "/accounts/user-profile/",
+    "scopes": [
+      "_CodePassPermission"
+    ],
+    "handler": "updateUserProfileHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/accounts/user-profile/api-key/",
+    "scopes": [
+      "_CodePassPermission"
+    ],
+    "handler": "getUserAPIKeyHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PUT",
+    "path": "/accounts/user-profile/api-key/",
+    "scopes": [
+      "_CodePassPermission"
+    ],
+    "handler": "updateUserAPIKeyHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "DELETE",
+    "path": "/accounts/user-profile/api-key/",
+    "scopes": [
+      "_CodePassPermission"
+    ],
+    "handler": "deleteUserAPIKeyHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/accounts/teammates/",
+    "scopes": [
+      "_CodeExploreUserAPI"
+    ],
+    "handler": "listTeammatesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/accounts/teammates/",
+    "scopes": [
+      "_CodeControlUserAPI"
+    ],
+    "handler": "createTeammateHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/accounts/teammates/:teammate_id/roles/",
+    "scopes": [
+      "_CodeExploreUserAPI"
+    ],
+    "handler": "listTeammateRolesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PUT",
+    "path": "/accounts/teammates/:teammate_id/roles/",
+    "scopes": [
+      "_CodeInvokeUserAPI"
+    ],
+    "handler": "updateTeammateRolesHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/accounts/teammates/:teammate_id/deactivate/",
+    "scopes": [
+      "_CodeInvokeUserAPI"
+    ],
+    "handler": "deactivateTeammateHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/accounts/teammates/:teammate_id/reactivate/",
+    "scopes": [
+      "_CodeInvokeUserAPI"
+    ],
+    "handler": "reactivateTeammateHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "DELETE",
+    "path": "/accounts/teammates/:teammate_id/",
+    "scopes": [
+      "_CodeGovernUserAPI"
+    ],
+    "handler": "deleteTeammateHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/accounts/organization-profile/",
+    "scopes": [
+      "_CodePassPermission"
+    ],
+    "handler": "getOrganizationProfileHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PUT",
+    "path": "/accounts/organization-profile/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateOrganizationProfileHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/accounts/organization-profile/roles/",
+    "scopes": [
+      "_CodeExploreUserAPI"
+    ],
+    "handler": "listOrganizationRolesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/stream-controller/transcoder_scenario/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listTranscoderScenarioHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/stream-controller/app/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "createStreamApplicationHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/stream-controller/app/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listStreamApplicationHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PATCH",
+    "path": "/stream-controller/app/:app_name/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateStreamApplicationHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/stream-controller/app/:app_name/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "getStreamApplicationHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/decisive/zones/:domain",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "getDecisiveZoneHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PATCH",
+    "path": "/decisive/zones/:domain",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateDecisiveZoneHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/decisive/strategyProfiles/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listStrategyProfilesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/decisive/zones/:domain/strategies/",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "listStrategiesHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "POST",
+    "path": "/decisive/zones/:domain/strategies/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "createStrategyHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "PATCH",
+    "path": "/decisive/zones/:domain/strategies/priority/",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateStrategyPriorityHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "GET",
+    "path": "/decisive/zones/:domain/strategies/:strategy_id",
+    "scopes": [
+      "_CodeExploreSiteAPI"
+    ],
+    "handler": "getStrategyDetailHandler",
+    "write": false
+  },
+  {
+    "api_version": "v2",
+    "method": "PATCH",
+    "path": "/decisive/zones/:domain/strategies/:strategy_id",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "updateStrategyHandler",
+    "write": true
+  },
+  {
+    "api_version": "v2",
+    "method": "DELETE",
+    "path": "/decisive/zones/:domain/strategies/:strategy_id",
+    "scopes": [
+      "_CodeInvokeSiteAPI"
+    ],
+    "handler": "deleteStrategyHandler",
+    "write": true
+  }
+]
