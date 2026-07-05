@@ -14,7 +14,11 @@ import { readFileSync, writeFileSync } from "node:fs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const routes = JSON.parse(readFileSync(ROOT + "out/routes.json"));
-const spec = JSON.parse(readFileSync(ROOT + "out/openapi.json"));
+// Both public specs: v2 (readme-v2-bulldozer.yml) + v1 (readme-v1-bigmac.yml).
+const SPECS = [];
+for (const [file, ver] of [["out/openapi.json", "v2"], ["out/openapi-v1.json", "v1"]]) {
+  try { SPECS.push({ doc: JSON.parse(readFileSync(ROOT + file)), ver }); } catch {}
+}
 // Go-struct fallback schemas (gen/struct_schema.py) — closes the OpenAPI gap.
 let structSchemas = {};
 try { structSchemas = JSON.parse(readFileSync(ROOT + "out/struct-schemas.json")); } catch {}
@@ -30,15 +34,24 @@ const blank = (p) =>
    .replace(/:[^/]+/g, "{}")              // :domain   -> {}  (Go style)
    .replace(/\/+$/, "");                  // ignore trailing slash
 const specIndex = new Map();
-for (const [p, item] of Object.entries(spec.paths || {}))
-  for (const [m, op] of Object.entries(item))
-    if (["get", "post", "put", "patch", "delete"].includes(m))
-      specIndex.set(`${m.toUpperCase()} ${blank(p)}`, { op, path: p });
+for (const { doc, ver } of SPECS)
+  for (const [p, item] of Object.entries(doc.paths || {}))
+    for (const [m, op] of Object.entries(item))
+      if (["get", "post", "put", "patch", "delete"].includes(m))
+        specIndex.set(`${ver} ${m.toUpperCase()} ${blank(p)}`, { op, path: p, doc });
+
+// Raw-proxy handlers whose body passes straight through to the upstream
+// service (no local Go struct), but an equivalent spec operation documents
+// the same upstream shape — borrow that schema.
+const BORROW = {
+  createV2ZonePurgeHandler: "v2 POST /sites/{}/purges", // same upstream purge service as sites
+};
 
 // --- $ref inlining: copy referenced component schemas into $defs ------------
-function collectRefs(schema, defs) {
+// `doc` is the spec document the schema came from ($refs resolve within it).
+function collectRefs(schema, defs, doc) {
   if (!schema || typeof schema !== "object") return schema;
-  if (Array.isArray(schema)) return schema.map((s) => collectRefs(s, defs));
+  if (Array.isArray(schema)) return schema.map((s) => collectRefs(s, defs, doc));
   const out = {};
   for (const [k, v] of Object.entries(schema)) {
     if (k === "$ref" && typeof v === "string" && v.startsWith("#/components/schemas/")) {
@@ -46,9 +59,9 @@ function collectRefs(schema, defs) {
       out.$ref = `#/$defs/${name}`;
       if (!defs[name]) {
         defs[name] = {};                                   // reserve (cycle guard)
-        defs[name] = collectRefs(spec.components.schemas[name], defs);
+        defs[name] = collectRefs(doc.components.schemas[name], defs, doc);
       }
-    } else out[k] = collectRefs(v, defs);
+    } else out[k] = collectRefs(v, defs, doc);
   }
   return out;
 }
@@ -76,17 +89,21 @@ for (const r of routes) {
     required.push(pp);
   }
 
-  const hit = specIndex.get(`${r.method} ${blank(r.path)}`);
+  let hit = specIndex.get(`${r.api_version} ${r.method} ${blank(r.path)}`);
   let schemaSource = "inferred";
+  if (!hit && BORROW[r.handler]) {
+    hit = specIndex.get(BORROW[r.handler]);
+    if (hit) schemaSource = "openapi-borrowed";
+  }
   let description;
 
   if (hit) {
-    schemaSource = "openapi";
+    if (schemaSource === "inferred") schemaSource = "openapi";
     description = hit.op.summary || hit.op.description || "";
     // query params from spec
     for (const prm of hit.op.parameters || []) {
       if (prm.in === "query") {
-        properties[prm.name] = collectRefs(prm.schema || { type: "string" }, defs);
+        properties[prm.name] = collectRefs(prm.schema || { type: "string" }, defs, hit.doc);
         if (prm.description) properties[prm.name].description = prm.description;
         if (prm.required) required.push(prm.name);
       }
@@ -94,7 +111,7 @@ for (const r of routes) {
     // request body -> `body` object
     const body = hit.op.requestBody?.content?.["application/json"]?.schema;
     if (body) {
-      properties.body = collectRefs(body, defs);
+      properties.body = collectRefs(body, defs, hit.doc);
       if (r.write) required.push("body");
     }
   } else if (structSchemas[r.handler]) {
@@ -126,7 +143,7 @@ for (const r of routes) {
     },
   });
 
-  const bucket = schemaSource === "openapi" ? "enriched" : schemaSource === "go-struct" ? "gostruct" : "inferred";
+  const bucket = schemaSource.startsWith("openapi") ? "enriched" : schemaSource === "go-struct" ? "gostruct" : "inferred";
   report[bucket] = (report[bucket] || 0) + 1;
   report.byDomain[domain] = report.byDomain[domain] || { enriched: 0, gostruct: 0, inferred: 0 };
   report.byDomain[domain][bucket]++;

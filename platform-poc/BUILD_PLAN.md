@@ -51,13 +51,14 @@ types), maps all 30 BindJSON handlers to their request structs (30/30), and
 emits JSON Schemas consumed by the generator.
 
 **Result on the full 82-route surface:**
-- 37 tools with real schemas (8 OpenAPI + 29 Go-struct)
-- 30 GET tools complete without a body (path/query params are the schema)
-- 15 "gap" routes: 13 are body-less DELETE/action-POSTs (complete as-is);
-  the real remainder is the 2 raw-proxy purge routes (`createPurgeHandler`
-  proxies the body straight to micro-zone-v3) — borrow the spec's sites-purge
-  schema or extract from micro-zone-v3 structs.
-- **Effective coverage: ~80/82 (98%).**
+- 44 tools with real schemas (19 OpenAPI incl. the v1 spec + 1 borrowed
+  purge schema, 25 Go-struct)
+- 26 GET tools complete without a body (path/query params are the schema)
+- 12 remaining "gap" routes are ALL body-less DELETE/action-POSTs (logout,
+  deactivate/reactivate, api-key rotate) — complete as-is.
+- **Effective coverage: 82/82. Every write route with a real body now has a
+  real schema.** (v1 routes matched against readme-v1-bigmac.yml; the v2
+  zone-purge raw-proxy borrows the spec's sites-purge schema via BORROW map.)
 
 Durable end state remains option A (`swag` annotations in micro-open-api) so the
 spec becomes a maintained build artifact; the extractor is the bridge until then.

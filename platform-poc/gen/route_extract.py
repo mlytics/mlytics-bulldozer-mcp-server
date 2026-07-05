@@ -43,7 +43,9 @@ def parse(block_text, version):
     return out
 
 routes = parse(block("getV1Routers"), "v1") + parse(block("getV2Routers"), "v2")
-pathlib.Path("/home/user/mcp-platform-poc/out/routes.json").write_text(
+OUT = pathlib.Path(__file__).resolve().parent.parent / "out" / "routes.json"
+OUT.parent.mkdir(exist_ok=True)
+OUT.write_text(
     json.dumps(routes, indent=2)
 )
 res = {}
