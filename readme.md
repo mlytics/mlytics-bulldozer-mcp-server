@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/mlytics-mlytics-bulldozer-mcp-server-badge.png)](https://mseep.ai/app/mlytics-mlytics-bulldozer-mcp-server)
+
 # Mlytics CDN MCP Server
 
 A Model Context Protocol (MCP) server implementation for managing Mlytics CDN sites and DNS records.
